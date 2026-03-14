@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'RSKFont', sans-serif, Arial, 'Segoe UI';
+    color: var(--homepage-text);
+}
+
+body {
+    background: #16181c;
+}
+
+@font-face {
+    font-family: 'RSKFont';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/RSKFont.eot');
+    src: url('/fonts/RSKFont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/RSKFont.woff2') format('woff2'),
+         url('/fonts/RSKFont.woff') format('woff'),
+         url('/fonts/RSKFont.ttf') format('truetype'),
+         url('/fonts/RSKFont.otf') format('opentype'),
+}
+
+ul, ol, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a, span, br {
+    text-decoration: none;
+}
