@@ -4,7 +4,9 @@ import reactLogo from '/images/react.svg'
 import viteLogo from '/images/vite.svg'
 import faviconIcon from '/icons/favicon.svg'
 import happyGif from '/gifs/happy.gif'
-import { enEN } from '../locales/en-EN'
+import { languageEntries, themeEntries } from '../config/app-settings'
+import { useLanguage } from '../contexts/LanguageContext'
+import { useTheme } from '../contexts/ThemeContext'
 import {
   getConnectionPreview,
   type ConnectionMode,
@@ -26,7 +28,9 @@ const stackLogos = {
 }
 
 export function HomePage() {
-  const copy = enEN.homepage
+  const { copy, language, languages, setLanguage } = useLanguage()
+  const { theme, themes, setTheme } = useTheme()
+  const homepage = copy.homepage
   const [mode, setMode] = useState<ConnectionMode>('online')
   const [preview, setPreview] = useState<ConnectionPreview | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -36,7 +40,7 @@ export function HomePage() {
 
     async function loadPreview() {
       setIsLoading(true)
-      const response = await getConnectionPreview(mode)
+      const response = await getConnectionPreview(mode, homepage.connection.responses)
 
       if (!isActive) {
         return
@@ -51,37 +55,77 @@ export function HomePage() {
     return () => {
       isActive = false
     }
-  }, [mode])
+  }, [homepage.connection.responses, mode])
 
   return (
     <main className="homepage">
+      <section className="homepage__manager" aria-label="App settings">
+        <div className="homepage__manager-group">
+          <span className="homepage__manager-label">{copy.controls.languageLabel}</span>
+          <div className="homepage__manager-options">
+            {languages.map((option) => (
+              <button
+                key={option}
+                type="button"
+                className={`homepage__manager-button${
+                  language === option ? ' homepage__manager-button--active' : ''
+                }`}
+                onClick={() => setLanguage(option)}
+                aria-pressed={language === option}
+              >
+                {languageEntries.find(({ code }) => code === option)?.switcherLabel ?? option}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="homepage__manager-group">
+          <span className="homepage__manager-label">{copy.controls.themeLabel}</span>
+          <div className="homepage__manager-options">
+            {themes.map((option) => (
+              <button
+                key={option}
+                type="button"
+                className={`homepage__manager-button${
+                  theme === option ? ' homepage__manager-button--active' : ''
+                }`}
+                onClick={() => setTheme(option)}
+                aria-pressed={theme === option}
+              >
+                {themeEntries.find(({ id }) => id === option)?.switcherLabel ?? option}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="homepage__hero">
         <div className="homepage__copy">
-          <p className="homepage__eyebrow">{copy.hero.eyebrow}</p>
-          <h1>{copy.hero.title}</h1>
-          <p className="homepage__lead">{copy.hero.description}</p>
+          <p className="homepage__eyebrow">{homepage.hero.eyebrow}</p>
+          <h1>{homepage.hero.title}</h1>
+          <p className="homepage__lead">{homepage.hero.description}</p>
 
           <div className="homepage__actions">
             <a
               className="homepage__button homepage__button--primary"
-              href={copy.hero.primaryCta.href}
+              href={homepage.hero.primaryCta.href}
               target="_blank"
               rel="noreferrer"
             >
-              {copy.hero.primaryCta.label}
+              {homepage.hero.primaryCta.label}
             </a>
             <a
               className="homepage__button homepage__button--secondary"
-              href={copy.hero.secondaryCta.href}
+              href={homepage.hero.secondaryCta.href}
               target="_blank"
               rel="noreferrer"
             >
-              {copy.hero.secondaryCta.label}
+              {homepage.hero.secondaryCta.label}
             </a>
           </div>
 
-          <ul className="homepage__highlights" aria-label={copy.hero.highlightsLabel}>
-            {copy.hero.highlights.map((highlight) => (
+          <ul className="homepage__highlights" aria-label={homepage.hero.highlightsLabel}>
+            {homepage.hero.highlights.map((highlight) => (
               <li key={highlight}>{highlight}</li>
             ))}
           </ul>
@@ -103,14 +147,14 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="homepage__grid" aria-label={copy.sectionsLabel}>
+      <section className="homepage__grid" aria-label={homepage.sectionsLabel}>
         <article className="homepage__card">
-          <p className="homepage__kicker">{copy.stack.kicker}</p>
-          <h2>{copy.stack.title}</h2>
-          <p className="homepage__muted">{copy.stack.description}</p>
+          <p className="homepage__kicker">{homepage.stack.kicker}</p>
+          <h2>{homepage.stack.title}</h2>
+          <p className="homepage__muted">{homepage.stack.description}</p>
 
           <div className="homepage__stack-list">
-            {copy.stack.items.map((item) => (
+            {homepage.stack.items.map((item) => (
               <div key={item.title} className="homepage__stack-item">
                 <img src={stackLogos[item.logo]} alt="" width="24" height="24" />
                 <div>
@@ -123,9 +167,9 @@ export function HomePage() {
         </article>
 
         <article className="homepage__card homepage__card--status">
-          <p className="homepage__kicker">{copy.connection.kicker}</p>
+          <p className="homepage__kicker">{homepage.connection.kicker}</p>
           <div className="homepage__status-headline">
-            <h2>{copy.connection.title}</h2>
+            <h2>{homepage.connection.title}</h2>
             <button
               type="button"
               className="homepage__toggle"
@@ -133,26 +177,26 @@ export function HomePage() {
               aria-pressed={mode === 'online'}
             >
               {mode === 'online'
-                ? copy.connection.onlineButton
-                : copy.connection.offlineButton}
+                ? homepage.connection.onlineButton
+                : homepage.connection.offlineButton}
             </button>
           </div>
 
-          <p className="homepage__muted">{copy.connection.description}</p>
+          <p className="homepage__muted">{homepage.connection.description}</p>
 
           <div className="homepage__status-panel">
             <span className={`homepage__badge homepage__badge--${mode}`}>
-              {preview?.badge ?? copy.connection.loadingBadge}
+              {preview?.badge ?? homepage.connection.loadingBadge}
             </span>
-            <strong>{isLoading ? copy.connection.loadingTitle : preview?.title}</strong>
-            <p>{isLoading ? copy.connection.loadingDescription : preview?.description}</p>
+            <strong>{isLoading ? homepage.connection.loadingTitle : preview?.title}</strong>
+            <p>{isLoading ? homepage.connection.loadingDescription : preview?.description}</p>
             <span className="homepage__meta">
-              {isLoading ? copy.connection.loadingMeta : preview?.meta}
+              {isLoading ? homepage.connection.loadingMeta : preview?.meta}
             </span>
           </div>
 
           <ul className="homepage__checklist">
-            {copy.connection.checklist.map((item) => (
+            {homepage.connection.checklist.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
@@ -161,13 +205,13 @@ export function HomePage() {
 
       <section className="homepage__resources">
         <div className="homepage__section-heading">
-          <p className="homepage__kicker">{copy.resources.kicker}</p>
-          <h2>{copy.resources.title}</h2>
-          <p className="homepage__muted">{copy.resources.description}</p>
+          <p className="homepage__kicker">{homepage.resources.kicker}</p>
+          <h2>{homepage.resources.title}</h2>
+          <p className="homepage__muted">{homepage.resources.description}</p>
         </div>
 
         <div className="homepage__resource-grid">
-          {copy.resources.links.map((link) => (
+          {homepage.resources.links.map((link) => (
             <a
               key={link.href}
               className="homepage__resource-card"
@@ -185,28 +229,28 @@ export function HomePage() {
 
       <section className="homepage__assets">
         <div className="homepage__section-heading">
-          <p className="homepage__kicker">{copy.assets.kicker}</p>
-          <h2>{copy.assets.title}</h2>
-          <p className="homepage__muted">{copy.assets.description}</p>
+          <p className="homepage__kicker">{homepage.assets.kicker}</p>
+          <h2>{homepage.assets.title}</h2>
+          <p className="homepage__muted">{homepage.assets.description}</p>
         </div>
 
         <div className="homepage__asset-grid">
           <article className="homepage__asset-card">
-            <img src={visuals.icon} alt={copy.assets.iconAlt} width="42" height="42" />
-            <strong>{copy.assets.iconTitle}</strong>
-            <p>{copy.assets.iconDescription}</p>
+            <img src={visuals.icon} alt={homepage.assets.iconAlt} width="42" height="42" />
+            <strong>{homepage.assets.iconTitle}</strong>
+            <p>{homepage.assets.iconDescription}</p>
           </article>
 
           <article className="homepage__asset-card">
-            <img src={visuals.hero} alt={copy.assets.imageAlt} />
-            <strong>{copy.assets.imageTitle}</strong>
-            <p>{copy.assets.imageDescription}</p>
+            <img src={visuals.hero} alt={homepage.assets.imageAlt} />
+            <strong>{homepage.assets.imageTitle}</strong>
+            <p>{homepage.assets.imageDescription}</p>
           </article>
 
           <article className="homepage__asset-card">
-            <img src={visuals.gif} alt={copy.assets.gifAlt} />
-            <strong>{copy.assets.gifTitle}</strong>
-            <p>{copy.assets.gifDescription}</p>
+            <img src={visuals.gif} alt={homepage.assets.gifAlt} />
+            <strong>{homepage.assets.gifTitle}</strong>
+            <p>{homepage.assets.gifDescription}</p>
           </article>
         </div>
       </section>

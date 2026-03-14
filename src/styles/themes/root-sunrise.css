@@ -1,0 +1,15 @@
+:root[data-theme='sunrise'] {
+  --homepage-bg: #f4efe7;
+  --homepage-surface: #fff9f1;
+  --homepage-surface-alt: #f8efdf;
+  --homepage-border: rgba(125, 90, 39, 0.12);
+  --homepage-text: #261b10;
+  --homepage-muted: #745c43;
+  --homepage-accent: #d97745;
+  --homepage-accent-strong: #9b4d27;
+  --homepage-accent-contrast: #fff8f2;
+  --homepage-focus: rgba(217, 119, 69, 0.3);
+  --homepage-shadow:
+    0 24px 60px rgba(104, 71, 31, 0.12),
+    0 10px 28px rgba(104, 71, 31, 0.08);
+}

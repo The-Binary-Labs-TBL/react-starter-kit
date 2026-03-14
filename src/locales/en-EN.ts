@@ -1,4 +1,8 @@
 export const enEN = {
+  controls: {
+    languageLabel: 'Language',
+    themeLabel: 'Theme',
+  },
   homepage: {
     sectionsLabel: 'Starter kit overview',
     hero: {
@@ -55,6 +59,22 @@ export const enEN = {
       loadingTitle: 'Loading starter preview...',
       loadingDescription: 'Fetching placeholder data from the demo service layer.',
       loadingMeta: 'Preparing response',
+      responses: {
+        online: {
+          badge: 'API online',
+          title: 'Connected to a placeholder endpoint',
+          description:
+            'Your frontend can behave as if a backend answered successfully and returned starter content.',
+          meta: 'Mock latency: 180ms',
+        },
+        offline: {
+          badge: 'Offline mode',
+          title: 'Showing fallback frontend behaviour',
+          description:
+            'The same UI can now explain missing connectivity and still stay understandable for the user.',
+          meta: 'Fallback source: local placeholder',
+        },
+      },
       checklist: [
         'Good place to swap in a real backend later',
         'Simple enough to understand without extra libraries',
