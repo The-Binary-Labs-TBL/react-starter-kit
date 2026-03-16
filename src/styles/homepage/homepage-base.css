@@ -1,0 +1,231 @@
+.homepage {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 72px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--homepage-text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.homepage__manager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border: 1px solid var(--homepage-border);
+  border-radius: 24px;
+  background: var(--homepage-surface);
+  box-shadow: var(--homepage-shadow);
+}
+
+.homepage__manager-group,
+.homepage__manager-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.homepage__manager-label {
+  color: var(--homepage-muted);
+  font-size: 0.92rem;
+}
+
+.homepage__manager-button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--homepage-border);
+  border-radius: 999px;
+  background: var(--homepage-surface-alt);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.homepage__manager-button:hover {
+  transform: translateY(-1px);
+}
+
+.homepage__manager-button--active {
+  background: var(--homepage-accent);
+  color: var(--homepage-accent-contrast);
+  border-color: transparent;
+  box-shadow: var(--homepage-shadow);
+}
+
+.homepage h1,
+.homepage h2,
+.homepage p,
+.homepage strong,
+.homepage span {
+  color: inherit;
+}
+
+.homepage h1,
+.homepage h2,
+.homepage p,
+.homepage strong {
+  margin: 0;
+}
+
+.homepage h1,
+.homepage h2 {
+  line-height: 1.08;
+}
+
+.homepage h1 {
+  font-size: clamp(2.5rem, 5vw, 4.7rem);
+}
+
+.homepage h2 {
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+}
+
+.homepage a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.homepage img {
+  display: block;
+  max-width: 100%;
+}
+
+.homepage ul,
+.homepage ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.homepage button {
+  font: inherit;
+  color: inherit;
+}
+
+.homepage__eyebrow,
+.homepage__kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--homepage-accent-strong);
+}
+
+.homepage__muted,
+.homepage__resource-card span,
+.homepage__asset-card p,
+.homepage__stack-item p,
+.homepage__status-panel p {
+  color: var(--homepage-muted);
+}
+
+.homepage__grid,
+.homepage__resource-grid,
+.homepage__asset-grid {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.homepage__grid,
+.homepage__resource-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.homepage__section-heading {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.homepage__card,
+.homepage__resources,
+.homepage__asset-card {
+  border: 1px solid var(--homepage-border);
+  border-radius: 28px;
+  background: var(--homepage-surface);
+  box-shadow: var(--homepage-shadow);
+}
+
+.homepage__card,
+.homepage__resources {
+  padding: 28px;
+}
+
+.homepage__asset-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.homepage__asset-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 22px;
+  overflow: hidden;
+}
+
+.homepage__asset-card img:not([width]) {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+@media (max-width: 900px) {
+  .homepage {
+    width: min(100%, calc(100% - 24px));
+    padding: 24px 0 40px;
+    font-size: 16px;
+  }
+
+  .homepage__grid,
+  .homepage__resource-grid,
+  .homepage__asset-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .homepage__card,
+  .homepage__resources,
+  .homepage__asset-card {
+    border-radius: 24px;
+  }
+
+  .homepage__card,
+  .homepage__resources {
+    padding: 24px;
+  }
+
+  .homepage__manager {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .homepage__manager-group {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 640px) {
+  .homepage {
+    width: min(100%, calc(100% - 20px));
+  }
+
+  .homepage__manager-group,
+  .homepage__manager-options {
+    flex-wrap: wrap;
+  }
+
+  .homepage__card,
+  .homepage__resources,
+  .homepage__asset-card {
+    padding: 20px;
+  }
+}
