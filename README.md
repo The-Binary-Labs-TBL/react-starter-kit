@@ -1,10 +1,9 @@
 # React Starter Kit
 
-A small React starter kit with TypeScript, React Router, a demo homepage, a simple language manager, and a simple theme manager.
+A minimal React starter kit with TypeScript, React Router, a language manager, a theme manager, and a tiny mock API example.
 
-This project is intentionally kept simple.
-No extra i18n library, no theme framework, and no overly complex app architecture.
-Just a clean structure that is easy to understand and easy to extend.
+The project is intentionally small.
+It is meant to be easy to read, easy to extend, and a clean base for new projects.
 
 ## Start
 
@@ -21,32 +20,32 @@ npm run lint
 npm run preview
 ```
 
-## Project Idea
+## What Is Included
 
-This starter kit shows a simple standard structure for small to medium React projects:
+- React + TypeScript
+- React Router base setup
+- language handling via React Context
+- theme handling via React Context
+- persistence with `localStorage`
+- themes with CSS variables
+- a small mock API example for loading and fallback states
 
-- `src/app` for the app shell and router
+## Project Structure
+
+- `src/app` for app shell and router
 - `src/pages` for pages
+- `src/contexts` for language and theme state
+- `src/config` for central app settings
+- `src/locales` for translation content
 - `src/services` for API or mock logic
 - `src/styles` for global styles, themes, and page CSS
-- `src/locales` for language content
-- `src/contexts` for global managers like language and theme
-- `src/config` for central settings
 
-The homepage is only a demo page.
-You can delete or replace it at any time.
+The homepage is only a small preview page.
+You can replace it at any time.
 
-## Language And Theme Manager
+## Language And Theme
 
-Both are intentionally minimal:
-
-- language via React Context
-- theme via React Context
-- persistence via `localStorage`
-- themes via CSS variables
-- everything configured centrally in one file
-
-The most important file for this is:
+The most important setup file is:
 
 - `src/config/app-settings.ts`
 
@@ -59,30 +58,22 @@ It contains:
 - available themes
 - switcher labels
 
-## How To Use It
+### Change The Default Language Or Theme
 
-### Change The Default Language Or Default Theme
-
-File:
-
-- `src/config/app-settings.ts`
-
-Section:
+Edit `src/config/app-settings.ts`:
 
 ```ts
 defaults: {
   language: 'en-EN',
-  theme: 'midnight',
+  theme: 'sunrise',
 }
 ```
 
-This controls what is used on the first load.
-
 ### Add A New Language
 
-1. Create a new locale file inside `src/locales`.
-2. Import that file in `src/config/app-settings.ts`.
-3. Add the language to `languages`.
+1. Create a new locale file in `src/locales`.
+2. Import it in `src/config/app-settings.ts`.
+3. Add it to the `languages` array.
 
 Example:
 
@@ -111,15 +102,11 @@ languages: [
 ]
 ```
 
-Important:
-The actual text always lives inside the locale file.
-The central config only connects the code, label, and message object.
-
 ### Add A New Theme
 
-1. Create a new CSS file inside `src/styles/themes`.
-2. Import the CSS file in `src/main.tsx`.
-3. Add the theme to `themes` in `src/config/app-settings.ts`.
+1. Create a new CSS file in `src/styles/themes`.
+2. Import it in `src/main.tsx`.
+3. Add it to the `themes` array in `src/config/app-settings.ts`.
 
 Example config:
 
@@ -144,44 +131,52 @@ Example theme file:
 
 ```css
 :root[data-theme='forest'] {
-  --homepage-bg: #102018;
-  --homepage-surface: #163124;
-  --homepage-surface-alt: #1d3d2d;
-  --homepage-border: rgba(255, 255, 255, 0.08);
-  --homepage-text: #edf7ef;
-  --homepage-muted: #b7cbbb;
-  --homepage-accent: #7fd59a;
-  --homepage-accent-strong: #98e7af;
-  --homepage-accent-contrast: #0d1812;
-  --homepage-focus: rgba(127, 213, 154, 0.35);
-  --homepage-shadow:
+  --app-bg: #102018;
+  --app-surface: #163124;
+  --app-surface-muted: #1d3d2d;
+  --app-border: rgba(255, 255, 255, 0.08);
+  --app-text: #edf7ef;
+  --app-muted: #b7cbbb;
+  --app-accent: #7fd59a;
+  --app-accent-contrast: #0d1812;
+  --app-shadow:
     0 24px 60px rgba(0, 0, 0, 0.24),
     0 10px 28px rgba(0, 0, 0, 0.16);
 }
 ```
 
+## Homepage Styling
+
+The homepage styles are split into two files:
+
+- `src/styles/homepage/homepage-layout.css` for structure and spacing
+- `src/styles/homepage/homepage-style.css` for colors and visual styling
+
+`src/styles/homepage/homepage.css` only imports both files.
+
 ## Relevant Files
 
-- `src/config/app-settings.ts`: central language and theme settings
-- `src/contexts/LanguageContext.tsx`: language manager
-- `src/contexts/ThemeContext.tsx`: theme manager
-- `src/locales/de-DE.ts`: German locale file
-- `src/locales/en-EN.ts`: English locale file
-- `src/styles/themes/root-midnight.css`: first theme
-- `src/styles/themes/root-sunrise.css`: second theme
-- `src/pages/HomePage.tsx`: demo page with the switchers
+- `src/pages/HomePage.tsx`
+- `src/services/api.tsx`
+- `src/config/app-settings.ts`
+- `src/contexts/LanguageContext.tsx`
+- `src/contexts/ThemeContext.tsx`
+- `src/locales/de-DE.ts`
+- `src/locales/en-EN.ts`
+- `src/styles/global.css`
+- `src/styles/themes/root-midnight.css`
+- `src/styles/themes/root-sunrise.css`
 
-## Why It Stays Simple
+## Idea Behind This Starter
 
-Many starter kits become too large too quickly.
-This one is meant to stay a small, clean foundation.
+This starter kit stays small on purpose.
 
-That is why the project prefers:
+It prefers:
 
-- clear files over too much abstraction
-- CSS variables over large theme systems
-- simple contexts over many libraries
-- one central config over values scattered across many files
+- simple files over heavy abstraction
+- CSS variables over larger theme systems
+- React Context over extra state libraries
+- one central config over scattered setup
 
-If you need more later, you can build on top of it.
-But the core idea stays the same: easy to understand, easy to start, easy to extend.
+If your project grows, you can build on top of it.
+The foundation should still stay clear and easy to understand.
