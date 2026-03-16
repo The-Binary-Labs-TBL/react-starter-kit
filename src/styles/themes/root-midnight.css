@@ -1,16 +1,14 @@
 :root,
 :root[data-theme='midnight'] {
-  --homepage-bg: #16181c;
-  --homepage-surface: #1d2026;
-  --homepage-surface-alt: #242831;
-  --homepage-border: rgba(255, 255, 255, 0.08);
-  --homepage-text: #f3f5f9;
-  --homepage-muted: #a9b2c5;
-  --homepage-accent: #6fe7c8;
-  --homepage-accent-strong: #86f7db;
-  --homepage-accent-contrast: #0f1715;
-  --homepage-focus: rgba(111, 231, 200, 0.55);
-  --homepage-shadow:
+  --app-bg: #15181d;
+  --app-surface: #1d2128;
+  --app-surface-muted: #242933;
+  --app-border: rgba(255, 255, 255, 0.08);
+  --app-text: #f4f7fb;
+  --app-muted: #aab4c8;
+  --app-accent: #6fe7c8;
+  --app-accent-contrast: #101816;
+  --app-shadow:
     0 24px 60px rgba(0, 0, 0, 0.28),
     0 10px 28px rgba(0, 0, 0, 0.18);
 }

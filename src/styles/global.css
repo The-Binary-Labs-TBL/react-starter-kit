@@ -3,15 +3,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'RSKFont', sans-serif, Arial, 'Segoe UI';
-  color: var(--homepage-text);
 }
 
 html {
-  background: var(--homepage-bg);
+  background: var(--app-bg);
 }
 
 body {
-  background: var(--homepage-bg);
+  background: var(--app-bg);
+  color: var(--app-text);
   transition: background-color 180ms ease;
 }
 
@@ -35,6 +35,13 @@ ul, ol, li {
   margin: 0;
 }
 
-a, span, br {
+a {
   text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }

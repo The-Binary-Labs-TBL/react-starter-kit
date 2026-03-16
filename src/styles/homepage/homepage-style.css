@@ -1,0 +1,82 @@
+.homepage__header,
+.homepage__card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+  box-shadow: var(--app-shadow);
+}
+
+.homepage__card--muted {
+  background: var(--app-surface-muted);
+}
+
+.homepage__eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--app-accent);
+}
+
+.homepage h1,
+.homepage h2 {
+  color: var(--app-text);
+  line-height: 1.15;
+}
+
+.homepage h1 {
+  margin-bottom: 10px;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.homepage h2 {
+  font-size: 1.1rem;
+}
+
+.homepage p,
+.homepage span,
+.homepage button {
+  color: var(--app-text);
+}
+
+.homepage__lead,
+.homepage__card p,
+.homepage__api-status span {
+  color: var(--app-muted);
+  line-height: 1.5;
+}
+
+.homepage__control-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.homepage__chip {
+  border: 1px solid var(--app-border);
+  background: var(--app-surface-muted);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.homepage__chip:hover,
+.homepage__chip:focus-visible {
+  border-color: var(--app-accent);
+  outline: none;
+}
+
+.homepage__chip--active,
+.homepage__chip--action {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: var(--app-accent-contrast);
+}
+
+.homepage__api-status {
+  padding-top: 4px;
+  border-top: 1px solid var(--app-border);
+}
